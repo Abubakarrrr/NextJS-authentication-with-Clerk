@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 function Header() {
   return (
     <header className="bg-gradient-to-r from-blue-300 to-purple-400 shadow-lg">
@@ -16,7 +17,12 @@ function Header() {
           <ul className="flex gap-4">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
-           
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
           </ul>
         </nav>
       </div>
