@@ -54,11 +54,27 @@ export async function POST(req) {
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log("Webhook body:", body);
 
-  if (eventType === "user.created") {
-    console.log("user created");
-  }
-  if (eventType === "user.updated") {
-    console.log("user updated");
+  if (eventType === "user.created" || eventType === "user.updated") {
+    const { id, first_name, last_name, image_url, email_addresses, username } =
+      evt?.data;
+    try {
+      await createOrUpdateUser(
+        id,
+        first_name,
+        last_name,
+        image_url,
+        email_addresses,
+        username
+      );
+      return new Response("User is created or updated", {
+        status: 200,
+      });
+    } catch (error) {
+      console.log("Error creating or updating user:", error);
+      return new Response("Error occured", {
+        status: 400,
+      });
+    }
   }
 
 
