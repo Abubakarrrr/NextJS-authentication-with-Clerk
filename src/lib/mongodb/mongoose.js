@@ -10,7 +10,7 @@ export const connect = async () => {
   }
   try {
     await mongoose.connect(process.env.MONG0DB_URI, {
-      dbName: "clerk auth app",
+      dbName: "clerk-auth-app",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
